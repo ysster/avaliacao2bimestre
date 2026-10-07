@@ -6,6 +6,28 @@ import database
 
 auth_bp = Blueprint("auth", __name__)
 
+@auth_bp.route("/registro", methods=["GET", "POST"])
+def registro():
+    if request.method == "POST":
+        flash("Implemente o cadastro com hash de senha.")
+        return redirect(url_for("registro"))
+
+    return render_template("registro.html")
+
+@auth_bp.route("/login", methods=["GET", "POST"])
+def login():
+    if request.method == "POST":
+        email = request.form("email")
+        senha = request.form("senha")
+        return redirect(url_for("login"))
+
+    return render_template("login.html")
+
+
+@auth_bp.route("/logout")
+def logout():
+    return redirect(url_for("index"))
+
 
 # Complete este arquivo durante a avaliação.
 #

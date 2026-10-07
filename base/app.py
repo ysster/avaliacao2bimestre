@@ -3,6 +3,7 @@ import math
 from flask import Flask, flash, redirect, render_template, request, session, url_for
 
 import database
+import auth
 
 app = Flask(__name__)
 
@@ -57,29 +58,13 @@ def excluir_treino(treino_id):
     flash("Treino excluído.")
     return redirect(url_for("index"))
 
+@app.route( methods= ["GET", "POST"])
+def cadastrar():
+    nome = request.form("nome")
+    email = request.form("email")
+    senha = request.form("senha")
 
-@app.route("/registro", methods=["GET", "POST"])
-def registro():
-    if request.method == "POST":
-        flash("Implemente o cadastro com hash de senha.")
-        return redirect(url_for("registro"))
-
-    return render_template("registro.html")
-
-
-@app.route("/login", methods=["GET", "POST"])
-def login():
-    if request.method == "POST":
-        flash("Implemente o login com session.")
-        return redirect(url_for("login"))
-
-    return render_template("login.html")
-
-
-@app.route("/logout")
-def logout():
-    flash("Implemente o logout com session.")
-    return redirect(url_for("index"))
+    return render_template("dashboard")
 
 
 if __name__ == "__main__":
